@@ -92,4 +92,5 @@ ansible:
   script:
     - ls -al
     - export ANSIBLE_CONFIG=./ansible.cfg
+    - chmod 400 ./gitlab
     - ansible-playbook -i hosts install-apache.yml
