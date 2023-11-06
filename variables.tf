@@ -1,10 +1,16 @@
+variable "region" {
+  type    = string
+  default = "us-east-1"
+}
+
 variable "instance_count" {
   type    = number
-  default = 1
+  default = 2
 }
+
 variable "ami" {
   type    = string
-  default = "ami-0bb4c991fa89d4b9b"
+  default = "ami-0e8a34246278c21e4"
 }
 
 variable "instance_type" {
