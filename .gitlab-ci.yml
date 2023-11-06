@@ -4,18 +4,20 @@ default:
     entrypoint: [""]
   timeout: 15 minutes
   cache:
-    - key: $CI_COMMIT_REF_SLUG-terraform-cache
+    - key: $CI_PIPELINE_ID-terraform-cache
       paths:
         - .terraform/
         - .terraform.lock.hcl
-    - key: $CI_COMMIT_REF_SLUG-ssh-private-key
+    - key: $CI_PIPELINE_ID-ssh-private-key
       paths:
         - gitlab.pub
-    - key: $CI_JOB_ID-hosts
+    - key: $CI_PIPELINE_ID-hosts
       paths:
         - hosts
 
 variables:
+  ANSIBLE_HOST_KEY_CHECKING: 'false'
+  ANSIBLE_FORCE_COLOR: 'true'
   TF_DIR: ${CI_PROJECT_DIR}
   STATEFILE_NAME: "terraform.tfstate"   
   ADDRESS: "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/terraform/state/${STATEFILE_NAME}"
@@ -48,7 +50,7 @@ download_provider:
       -backend-config="unlock_method=DELETE"
       -backend-config="retry_wait_min=5" 
 
-generate_ssh_keys:
+.generate_ssh_keys:
   stage: generate_ssh_keys
   image: 
     name: kunchalavikram/ssh-keygen
