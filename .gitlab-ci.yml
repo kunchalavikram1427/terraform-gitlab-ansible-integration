@@ -3,6 +3,10 @@ default:
     name: hashicorp/terraform
     entrypoint: [""]
   timeout: 15 minutes
+  cache:
+    key: terraform-cache
+    paths:
+      - .terraform/
 
 stages:
   - format
@@ -16,14 +20,12 @@ format:
   stage: format
   script:
     - terraform fmt
+  cache: []
 
 download_provider:
   stage: init
   script:
     - terraform init
-  artifacts:
-    paths:
-      - .terraform/
 
 validate:
   stage: validate
@@ -37,13 +39,15 @@ generate_ssh_keys:
     entrypoint: [""]
   script:
     - ssh-keygen -t rsa -f ./gitlab -q -P ""
+  cache: []
   artifacts:
     paths:
       - gitlab
 
-.apply_configuration:
+apply_configuration:
   stage: apply
   script:
+    - ls -l
     - terraform apply -auto-approve
   artifacts:
     paths:
