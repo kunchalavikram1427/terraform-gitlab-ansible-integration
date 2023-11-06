@@ -23,7 +23,7 @@ download_provider:
     - terraform init
   artifacts:
     paths:
-      - .terraform
+      - .terraform/
 
 validate:
   stage: validate
