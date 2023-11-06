@@ -15,5 +15,5 @@ resource "aws_instance" "web" {
 
 }
 output "access_url" {
-  value = "http://${aws_instance.web.*.public_ip}"
+  value = "http://${aws_instance.web[*].public_ip}"
 }
