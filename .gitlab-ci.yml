@@ -32,8 +32,7 @@ download_provider:
   script:
     - terraform init
 
-apply_configuration:
-  when: never
+.apply_configuration:
   stage: apply
   script:
     - terraform apply -auto-approve
@@ -41,8 +40,7 @@ apply_configuration:
     paths:
       - hosts
 
-destroy_infra:
-  when: never
+.destroy_infra:
   stage: destroy
   script:
     - terraform destroy -auto-approve
