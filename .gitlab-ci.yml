@@ -12,6 +12,7 @@ stages:
 format:
   stage: format
   image: actions/ssh-keygen
+  entrypoint: [""]
   script:
     - ssh-keygen -t rsa -f ./gitlab -q -P ""
 
