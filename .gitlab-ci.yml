@@ -33,7 +33,8 @@ format:
 download_provider:
   stage: init
   script:
-    - terraform init \
+    - |
+      terraform init \ 
       -backend-config="address=${ADDRESS}" \ 
       -backend-config="lock_address=${ADDRESS}/lock" \ 
       -backend-config="unlock_address=${ADDRESS}/lock" \ 
