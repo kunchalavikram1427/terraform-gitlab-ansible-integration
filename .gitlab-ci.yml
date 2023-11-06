@@ -13,9 +13,9 @@ default:
         - gitlab
 stages:
   - format
-  - init
-  - validate
+  - init  
   - generate_ssh_keys
+  - validate
   - apply
   - destroy
 
@@ -30,12 +30,6 @@ download_provider:
   script:
     - terraform init
 
-validate:
-  stage: validate
-  script:
-    - ls -al
-    - terraform validate
-
 generate_ssh_keys:
   stage: generate_ssh_keys
   image: 
@@ -48,6 +42,12 @@ generate_ssh_keys:
   # artifacts:
   #   paths:
   #     - gitlab
+
+validate:
+  stage: validate
+  script:
+    - ls -al
+    - terraform validate
 
 apply_configuration:
   stage: apply
