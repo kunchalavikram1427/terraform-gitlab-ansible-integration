@@ -4,11 +4,13 @@ default:
     entrypoint: [""]
   timeout: 15 minutes
   cache:
-    key: terraform-cache
-    paths:
-      - .terraform/
-      - .terraform.lock.hcl
-
+    - key: terraform-cache
+      paths:
+        - .terraform/
+        - .terraform.lock.hcl
+    - key: ssh-private-key
+      paths:
+        - gitlab
 stages:
   - format
   - init
@@ -41,19 +43,20 @@ generate_ssh_keys:
     entrypoint: [""]
   script:
     - ssh-keygen -t rsa -f ./gitlab -q -P ""
-  cache: []
-  artifacts:
-    paths:
-      - gitlab
+    - ls -al
+  # cache: []
+  # artifacts:
+  #   paths:
+  #     - gitlab
 
 apply_configuration:
   stage: apply
   script:
     - ls -al
     - terraform apply -auto-approve
-  artifacts:
-    paths:
-      - hosts
+  # artifacts:
+  #   paths:
+  #     - hosts
 
 .destroy_infra:
   stage: destroy
