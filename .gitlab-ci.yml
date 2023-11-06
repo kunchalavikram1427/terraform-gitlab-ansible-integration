@@ -7,6 +7,7 @@ default:
     key: terraform-cache
     paths:
       - .terraform/
+      - .terraform.lock.hcl
 
 stages:
   - format
@@ -30,6 +31,7 @@ download_provider:
 validate:
   stage: validate
   script:
+    - ls -l
     - terraform validate
 
 generate_ssh_keys:
