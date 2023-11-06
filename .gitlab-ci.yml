@@ -1,14 +1,21 @@
+default:
+  image: 
+    name: hashicorp/terraform
+    entrypoint: [""]
 stages:
-  - validate
+  - format
   - init
+  - validate
   - plan
   - apply
   - destroy
 
-validate:
-  stage: validate
-  image: 
-    name: hashicorp/terraform
-    entrypoint: [""]
+format:
+  stage: format
   script:
-    - terraform validate
+    - terraform fmt
+
+download_provider:
+  stage: init
+  script:
+    - terraform init
