@@ -73,7 +73,8 @@ apply_configuration:
     paths:
       - hosts
 
-.destroy_infra:
+destroy_infra:
+  when: manual
   stage: destroy
   script:
     - terraform destroy -auto-approve
