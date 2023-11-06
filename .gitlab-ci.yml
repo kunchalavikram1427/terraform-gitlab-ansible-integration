@@ -10,7 +10,7 @@ default:
         - .terraform.lock.hcl
     - key: ssh-private-key
       paths:
-        - gitlab
+        - gitlab.pub
 stages:
   - format
   - init  
@@ -39,9 +39,9 @@ generate_ssh_keys:
     - ssh-keygen -t rsa -f ./gitlab -q -P ""
     - ls -al
   # cache: []
-  # artifacts:
-  #   paths:
-  #     - gitlab
+  artifacts:
+    paths:
+      - gitlab
 
 validate:
   stage: validate
