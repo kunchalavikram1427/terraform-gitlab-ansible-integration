@@ -9,6 +9,6 @@ validate:
   stage: validate
   image: 
     name: hashicorp/terraform
+    entrypoint: [""]
   script:
     - terraform validate
-  
