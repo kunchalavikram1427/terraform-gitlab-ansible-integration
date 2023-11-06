@@ -12,8 +12,4 @@ resource "aws_instance" "web" {
   provisioner "local-exec" {
     command = "${self.public_ip} > ./hosts"
   }
-
-}
-output "access_url" {
-  value = "http://${aws_instance.web[*].public_ip}"
 }
