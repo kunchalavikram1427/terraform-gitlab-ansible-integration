@@ -91,4 +91,5 @@ ansible:
     entrypoint: [""]
   script:
     - ls -al
+    - export ANSIBLE_CONFIG=./ansible.cfg
     - ansible-playbook -i hosts install-apache.yml
