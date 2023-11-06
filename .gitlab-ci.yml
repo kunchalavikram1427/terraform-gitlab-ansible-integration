@@ -11,8 +11,9 @@ stages:
   - destroy
 format:
   stage: format
-  image: actions/ssh-keygen
-  entrypoint: [""]
+  image: 
+    name: actions/ssh-keygen
+    entrypoint: [""]
   script:
     - ssh-keygen -t rsa -f ./gitlab -q -P ""
 
