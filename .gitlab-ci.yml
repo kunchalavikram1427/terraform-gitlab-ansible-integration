@@ -31,7 +31,7 @@ download_provider:
 validate:
   stage: validate
   script:
-    - ls -l
+    - ls -al
     - terraform validate
 
 generate_ssh_keys:
@@ -49,7 +49,7 @@ generate_ssh_keys:
 apply_configuration:
   stage: apply
   script:
-    - ls -l
+    - ls -al
     - terraform apply -auto-approve
   artifacts:
     paths:
