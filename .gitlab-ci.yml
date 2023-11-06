@@ -21,6 +21,9 @@ download_provider:
   stage: init
   script:
     - terraform init
+  artifacts:
+    paths:
+      - .terraform
 
 validate:
   stage: validate
