@@ -1,7 +1,6 @@
 # Terraform GitLab Integration
 https://docs.gitlab.com/ee/user/infrastructure/iac/terraform_state.html
 
-
 ## Installing tools
 
 ### Installing Terraform
