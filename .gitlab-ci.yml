@@ -7,36 +7,42 @@ stages:
   - format
   - init
   - validate
+  - generate_ssh_keys
   - apply
   - destroy
-format:
-  stage: format
+
+generate_ssh_keys:
+  stage: generate_ssh_keys
   image: 
     name: kunchalavikram/ssh-keygen
     entrypoint: [""]
   script:
     - ssh-keygen -t rsa -f ./gitlab -q -P ""
+  artifacts:
+    paths:
+      - gitlab
 
-# format:
-#   stage: format
-#   script:
-#     - terraform fmt
+format:
+  stage: format
+  script:
+    - terraform fmt
 
-# download_provider:
-#   stage: init
-#   script:
-#     - terraform init
+download_provider:
+  stage: init
+  script:
+    - terraform init
 
-# apply_configuration:
-#   stage: apply
-#   script:
-#     - terraform apply -auto-approve
-#   artifacts:
-#     paths:
-#       - hosts
+apply_configuration:
+  when: never
+  stage: apply
+  script:
+    - terraform apply -auto-approve
+  artifacts:
+    paths:
+      - hosts
 
-# destroy_infra:
-#   when: never
-#   stage: destroy
-#   script:
-#     - terraform destroy -auto-approve
+destroy_infra:
+  when: never
+  stage: destroy
+  script:
+    - terraform destroy -auto-approve
