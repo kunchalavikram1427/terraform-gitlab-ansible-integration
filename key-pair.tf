@@ -1,4 +1,5 @@
 resource "aws_key_pair" "terraform-demo" {
   key_name   = "terraform-ansible-integration"
-  public_key = file("./gitlab.pub")
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDdqwQUOW3J2ejKm8NDJZwz7/PFjHG6yNlec7TSDmHw8N75ypZA60M4802jbaS3zxirJBBiRg51o0RVQfhmtCSDXzgc9kQdtraz684mtnemtz7Mn2KziCH9Nq4cFwiy9NMSO4Yh1KBt0THHE3m8g+4JrWBvGIq5zVvY0aqVRKMyQpz4o9BJVsBTXKQ9Pspxw6K49ET9h9t3adWL13AxtHbTLJZv3tVscUKec8NlpimHTdZAtCmvpSC/lZ7HhLhtz/AJ3Bv1tucqWeOTpMrpBHAvdFI70MBOA4taI3Ckjzs5h3BX25f7lXh553DrVIM821Uzdlxq5xWjQvVj08ULlx1Nqtu3qu2xaclboCN8eW2G8m1tb/9ZbcJTGfrGYPn9iB0QdgVHoomKFp0Pn8yzOTZ/0c/iAqYTTyAH2R1dTC+zfqW0EWtskGgzN2WqqLLK9M3+JqZT9ZyqoS9nKv1wiOrxN+Bqn5r1Usm6JYMC5b2INftIKrcJRBL3sstCma4PqOc= kunch@DESKTOP-ML06FR4"
+  # public_key = file("./gitlab.pub")
 }

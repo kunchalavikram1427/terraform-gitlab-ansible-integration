@@ -11,7 +11,7 @@ default:
     - key: $CI_COMMIT_REF_SLUG-ssh-private-key
       paths:
         - gitlab.pub
-    - key: $CI_COMMIT_REF_SLUG-hosts
+    - key: $CI_JOB_ID-hosts
       paths:
         - hosts
 
@@ -92,5 +92,6 @@ ansible:
   script:
     - ls -al
     - export ANSIBLE_CONFIG=./ansible.cfg
+    - cat $gitlab > ./gitlab
     - chmod 400 ./gitlab
     - ansible-playbook -i hosts install-apache.yml
