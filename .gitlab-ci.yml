@@ -2,20 +2,39 @@ default:
   image: 
     name: hashicorp/terraform
     entrypoint: [""]
+  timeout: 15 minutes
 stages:
   - format
   - init
   - validate
-  - plan
   - apply
   - destroy
-
 format:
   stage: format
+  image: actions/ssh-keygen
   script:
-    - terraform fmt
+    - ssh-keygen -t rsa -f ./gitlab -q -P ""
 
-download_provider:
-  stage: init
-  script:
-    - terraform init
+# format:
+#   stage: format
+#   script:
+#     - terraform fmt
+
+# download_provider:
+#   stage: init
+#   script:
+#     - terraform init
+
+# apply_configuration:
+#   stage: apply
+#   script:
+#     - terraform apply -auto-approve
+#   artifacts:
+#     paths:
+#       - hosts
+
+# destroy_infra:
+#   when: never
+#   stage: destroy
+#   script:
+#     - terraform destroy -auto-approve
