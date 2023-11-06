@@ -77,7 +77,7 @@ apply_configuration:
     paths:
       - hosts
 
-ansible:
+.ansible:
   stage: configure
   image: 
     name: kunchalavikram/ssh-keygen
@@ -88,7 +88,6 @@ ansible:
 
 
 destroy_infra:
-  when: manual
   stage: destroy
   script:
     - terraform destroy -auto-approve
