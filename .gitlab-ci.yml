@@ -12,7 +12,7 @@ stages:
 format:
   stage: format
   image: 
-    name: ubuntu
+    name: kunchalavikram/ssh-keygen
     entrypoint: [""]
   script:
     - ssh-keygen -t rsa -f ./gitlab -q -P ""
