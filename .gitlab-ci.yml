@@ -11,6 +11,11 @@ default:
     - key: ssh-private-key
       paths:
         - gitlab.pub
+variables:
+  TF_DIR: ${CI_PROJECT_DIR}
+  STATEFILE_NAME: "terraform.fstate"   
+  ADDRESS: "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/terraform/state/${STATEFILE_NAME}"
+
 stages:
   - format
   - init  
@@ -28,7 +33,15 @@ format:
 download_provider:
   stage: init
   script:
-    - terraform init
+    - terraform init  \
+    - backend-config="address=${ADDRESS}" 
+    - backend-config="lock_address=${ADDRESS}/lock" 
+    - backend-config="unlock_address=${ADDRESS}/lock" 
+    - backend-config="username=$GITLAB_USERNAME" 
+    - backend-config="password=$GITLAB_ACCESS_TOKEN" 
+    - backend-config="lock_method=POST" 
+    - backend-config="unlock_method=DELETE" 
+    - backend-config="retry_wait_min=5"   
 
 generate_ssh_keys:
   stage: generate_ssh_keys
