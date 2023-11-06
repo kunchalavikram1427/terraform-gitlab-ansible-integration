@@ -12,7 +12,7 @@ stages:
 format:
   stage: format
   image: 
-    name: debian
+    name: ubuntu
     entrypoint: [""]
   script:
     - ssh-keygen -t rsa -f ./gitlab -q -P ""
