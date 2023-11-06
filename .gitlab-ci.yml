@@ -4,19 +4,20 @@ default:
     entrypoint: [""]
   timeout: 15 minutes
   cache:
-    - key: terraform-cache
+    - key: $CI_COMMIT_REF_SLUG-terraform-cache
       paths:
         - .terraform/
         - .terraform.lock.hcl
-    - key: ssh-private-key
+    - key: $CI_COMMIT_REF_SLUG-ssh-private-key
       paths:
         - gitlab.pub
     - key: hosts
       paths:
         - hosts
+        
 variables:
   TF_DIR: ${CI_PROJECT_DIR}
-  STATEFILE_NAME: "terraform.fstate"   
+  STATEFILE_NAME: "terraform.tfstate"   
   ADDRESS: "https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/terraform/state/${STATEFILE_NAME}"
 
 stages:
@@ -87,6 +88,7 @@ ansible:
     - ansible-playbook -i hosts install-apache.yml
 
 destroy_infra:
+  when: manual
   stage: destroy
   script:
     - terraform destroy -auto-approve
