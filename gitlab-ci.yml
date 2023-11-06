@@ -1,4 +1,4 @@
-https://mrcloudbook.hashnode.dev/gitlab-cicd-for-terraform-plan-apply-destroy-managing-infrastructure
+# https://mrcloudbook.hashnode.dev/gitlab-cicd-for-terraform-plan-apply-destroy-managing-infrastructure
 stages:
   - validate
   - plan

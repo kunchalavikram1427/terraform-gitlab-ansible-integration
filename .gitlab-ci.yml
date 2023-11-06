@@ -1,0 +1,14 @@
+stages:
+  - validate
+  - init
+  - plan
+  - apply
+  - destroy
+
+validate:
+  stage: validate
+  image: 
+    name: hashicorp/terraform
+  script:
+    - terraform validate
+  
