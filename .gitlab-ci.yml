@@ -11,6 +11,9 @@ default:
     - key: ssh-private-key
       paths:
         - gitlab.pub
+    - key: hosts
+      paths:
+        - hosts
 variables:
   TF_DIR: ${CI_PROJECT_DIR}
   STATEFILE_NAME: "terraform.fstate"   
@@ -22,6 +25,7 @@ stages:
   - generate_ssh_keys
   - validate
   - apply
+  - configure
   - destroy
 
 .format:
@@ -72,6 +76,16 @@ apply_configuration:
   artifacts:
     paths:
       - hosts
+
+ansible:
+  stage: configure
+  image: 
+    name: kunchalavikram/ssh-keygen
+    entrypoint: [""]
+  script:
+    - ls -al
+    - ansible-playbook all -i hosts install-apache.yml
+
 
 destroy_infra:
   when: manual
