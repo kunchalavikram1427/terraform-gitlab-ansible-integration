@@ -10,6 +10,6 @@ resource "aws_instance" "web" {
   security_groups = ["allow_ssh_http_sg"]
 
   provisioner "local-exec" {
-    command = "${self.public_ip} > ./hosts"
+    command = "echo ${self.public_ip} > ./hosts"
   }
 }
