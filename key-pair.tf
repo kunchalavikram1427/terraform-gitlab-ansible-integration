@@ -1,5 +1,4 @@
-# Register a key
 resource "aws_key_pair" "terraform-demo" {
   key_name   = "terraform-ansible-integration"
-  public_key = file("./gitlab.pub") # supply a public key. ssh-keygen
+  public_key = file("./gitlab.pub")
 }

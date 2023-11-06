@@ -53,10 +53,12 @@ apply_configuration:
   stage: apply
   script:
     - ls -al
+    - export AWS_ACCESS_KEY=${AWS_ACCESS_KEY_ID}
+    - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     - terraform apply -auto-approve
-  # artifacts:
-  #   paths:
-  #     - hosts
+  artifacts:
+    paths:
+      - hosts
 
 .destroy_infra:
   stage: destroy
