@@ -9,7 +9,19 @@ resource "aws_instance" "web" {
   key_name        = aws_key_pair.terraform-demo.key_name
   security_groups = ["allow_ssh_http_sg"]
 
+  # provisioner "local-exec" {
+  #   command = "echo ${self.public_ip} >> ./hosts"
+  # }
+}
+
+resource "null_resource" "hosts" {
+  depends_on = [ aws_instance.web ]
+  count = length(aws_instance.web)
   provisioner "local-exec" {
-    command = "echo ${self.public_ip} >> ./hosts"
+     command = "echo ${element(aws_instance.web[*].public_ip, count.index)} >> ./hosts"
+  }
+  provisioner "local-exec" {
+    command = "rm -f ./hosts"
+    when = destroy    
   }
 }
