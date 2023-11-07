@@ -62,7 +62,6 @@ apply_configuration:
     paths:
       - ./hosts
     expire_in: 1 day
-  cache: []
 
 ansible:
   stage: configure
@@ -76,6 +75,7 @@ ansible:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - ansible-playbook -i hosts install-apache.yml
+  cache: []
 
 destroy_infra:
   when: manual
