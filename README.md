@@ -18,3 +18,8 @@ https://gitlab.com/gitlab-org/configure/examples/gitlab-terraform-aws
 https://developer.hashicorp.com/terraform/language/settings/backends/http#configuration-variables
 https://medium.com/@dksoni4530/a-complete-overview-of-gitlab-managed-terraform-state-b30114f84c27
 https://medium.com/geekculture/how-to-run-an-ansible-playbook-using-gitlab-ci-cd-2135f76d7f1e
+
+
+https://docs.gitlab.com/ee/ci/resource_groups/
+https://gitlab.com/gitlab-org/gitlab/-/tree/master/lib/gitlab/ci/templates
+https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Terraform/Base.gitlab-ci.yml
