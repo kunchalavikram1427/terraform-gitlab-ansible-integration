@@ -5,7 +5,7 @@ variable "region" {
 
 variable "instance_count" {
   type    = number
-  default = 4
+  default = 1
 }
 
 variable "ami" {
