@@ -24,7 +24,7 @@ stages:
   - configure
   - destroy
 
-.format:
+format:
   stage: format
   script:
     - terraform fmt
@@ -69,19 +69,12 @@ ansible:
     name: alpinelinux/ansible:latest
     entrypoint: [""]
   script:
-    - ls -al
     - eval $(ssh-agent -s)
     - chmod 400 "$SSH_PRIVATE_KEY"
     - ssh-add "$SSH_PRIVATE_KEY"
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-    - ls -al ~/.ssh
     - ansible-playbook -i hosts install-apache.yml
-    # - ls -al
-    # - export ANSIBLE_CONFIG=./ansible.cfg
-    # - cat $gitlab > ./gitlab
-    # - chmod 400 ./gitlab
-    # - ansible-playbook -i hosts --private-key="$SSH_PRIVATE_KEY" --private-key=./gitlab install-apache.yml
 
 destroy_infra:
   when: manual
