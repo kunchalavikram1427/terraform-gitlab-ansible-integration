@@ -9,9 +9,6 @@ resource "aws_instance" "web" {
   key_name        = aws_key_pair.terraform-demo.key_name
   security_groups = ["allow_ssh_http_sg"]
 
-  # provisioner "local-exec" {
-  #   command = "echo ${self.public_ip} >> ./hosts"
-  # }
 }
 
 resource "null_resource" "hosts" {
