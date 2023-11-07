@@ -23,3 +23,4 @@ https://medium.com/geekculture/how-to-run-an-ansible-playbook-using-gitlab-ci-cd
 https://docs.gitlab.com/ee/ci/resource_groups/
 https://gitlab.com/gitlab-org/gitlab/-/tree/master/lib/gitlab/ci/templates
 https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Terraform/Base.gitlab-ci.yml
+https://docs.gitlab.com/ee/ci/ssh_keys/
