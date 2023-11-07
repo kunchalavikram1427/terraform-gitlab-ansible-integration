@@ -4,16 +4,9 @@ default:
     entrypoint: [""]
   timeout: 15 minutes
   cache:
-    - key: $CI_PIPELINE_ID-terraform-cache
+    - key: tf-cache
       paths:
         - .terraform/
-        - .terraform.lock.hcl
-    - key: $CI_PIPELINE_ID-ssh-private-key
-      paths:
-        - gitlab.pub
-    - key: $CI_PIPELINE_ID-hosts
-      paths:
-        - hosts
 
 variables:
   ANSIBLE_HOST_KEY_CHECKING: 'false'
@@ -25,17 +18,17 @@ variables:
 stages:
   - format
   - init  
-  - generate_ssh_keys
   - validate
   - apply
-  - destroy
   - configure
+  - destroy
 
 .format:
   stage: format
   script:
     - terraform fmt
   cache: []
+  allow_failure: true
 
 download_provider:
   stage: init
@@ -49,18 +42,6 @@ download_provider:
       -backend-config="lock_method=POST" 
       -backend-config="unlock_method=DELETE"
       -backend-config="retry_wait_min=5" 
-
-.generate_ssh_keys:
-  stage: generate_ssh_keys
-  image: 
-    name: kunchalavikram/ssh-keygen
-    entrypoint: [""]
-  script:
-    - ssh-keygen -t rsa -f ./gitlab -q -P ""
-    - ls -al
-  artifacts:
-    paths:
-      - gitlab
 
 validate:
   stage: validate
@@ -76,14 +57,10 @@ apply_configuration:
     - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     - terraform apply -auto-approve
   artifacts:
+    name: "$CI_JOB_NAME-${CI_JOB_ID}"
     paths:
-      - hosts
-
-destroy_infra:
-  when: manual
-  stage: destroy
-  script:
-    - terraform destroy -auto-approve
+      - ${TF_ROOT}/hosts
+    expire_in: 1 day
 
 ansible:
   stage: configure
@@ -91,6 +68,7 @@ ansible:
     name: alpinelinux/ansible:latest
     entrypoint: [""]
   script:
+    - ls -al
     - chmod 400 "$SSH_PRIVATE_KEY"
     # - ssh-add "$SSH_PRIVATE_KEY"
     # - mkdir -p ~/.ssh
@@ -102,3 +80,9 @@ ansible:
     # - cat $gitlab > ./gitlab
     # - chmod 400 ./gitlab
     # - ansible-playbook -i hosts --private-key=./gitlab install-apache.yml
+
+destroy_infra:
+  when: manual
+  stage: destroy
+  script:
+    - terraform destroy -auto-approve
