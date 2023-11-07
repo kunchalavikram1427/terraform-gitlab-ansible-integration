@@ -62,6 +62,7 @@ apply_configuration:
     paths:
       - ./hosts
     expire_in: 1 day
+  cache: []
 
 ansible:
   stage: configure
