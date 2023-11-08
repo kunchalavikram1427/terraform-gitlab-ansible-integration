@@ -1,5 +1,7 @@
 # Terraform GitLab Integration
 
+Video link: NA
+
 ## Known errors
 ```
 $ ansible-playbook -i hosts install-apache.yml
