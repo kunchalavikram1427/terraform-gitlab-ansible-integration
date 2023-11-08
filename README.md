@@ -20,4 +20,5 @@ https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Terra
 https://docs.gitlab.com/ee/ci/ssh_keys/
 https://docs.gitlab.com/ee/ci/yaml/index.html#dependencies
 https://docs.gitlab.com/ee/ci/yaml/index.html#artifacts
+https://github.com/aquasecurity/tfsec
 ```
