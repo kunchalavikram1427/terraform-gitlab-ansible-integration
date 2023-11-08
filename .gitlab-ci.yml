@@ -20,6 +20,7 @@ stages:
   - format
   - init  
   - validate
+  - security-scan
   - apply
   - configure
   - destroy
@@ -49,6 +50,14 @@ validate:
   script:
     - ls -al
     - terraform validate
+
+scan:
+  image: 
+    name: aquasec/tfsec-ci
+    entrypoint: [""]
+  stage: security-scan
+  script:
+    - tfsec .
 
 apply_configuration:
   stage: apply
