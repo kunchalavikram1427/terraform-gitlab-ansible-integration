@@ -48,7 +48,6 @@ download_provider:
 validate:
   stage: validate
   script:
-    - ls -al
     - terraform validate
 
 scan:
@@ -62,7 +61,6 @@ scan:
 apply_configuration:
   stage: apply
   script:
-    - ls -al
     - export AWS_ACCESS_KEY=${AWS_ACCESS_KEY_ID}
     - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     - terraform apply -auto-approve
@@ -90,4 +88,6 @@ destroy_infra:
   when: manual
   stage: destroy
   script:
+    - export AWS_ACCESS_KEY=${AWS_ACCESS_KEY_ID}
+    - export AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     - terraform destroy -auto-approve
